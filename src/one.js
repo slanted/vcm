@@ -1,3 +1,3 @@
 export function one() {
-    console.log("In function one");
+    console.log("In function one - easy");
 }
