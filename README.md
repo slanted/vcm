@@ -1,3 +1,3 @@
-Simple webpack setup for webpack 4.
+VCM
 
-Has CSS styling baked in.
+Prototype for idea
