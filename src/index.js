@@ -1,5 +1,7 @@
 import './main.css';
 import './setup.js';
+import './elements/test.js';
+
 
 function displayMessage(theMessage) {
     var message = document.getElementById("message");
