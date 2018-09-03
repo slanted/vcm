@@ -21,7 +21,8 @@ class MyElement extends PolymerElement {
     super.ready();
     console.log("About to get position");
     console.log("this:"+this);
-    navigator.geolocation.getCurrentPosition((pos) => {
+    navigator.geolocation.watchPosition((pos) => {
+      console.log("updating.");
       this.position = pos.coords.latitude + ":" + pos.coords.longitude;
     });
   }
