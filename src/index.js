@@ -1,6 +1,6 @@
 import './main.css';
 import './setup.js';
-import './elements/test.js';
+import './elements/position';
 
 
 function displayMessage(theMessage) {
