@@ -11,6 +11,34 @@ body {
     height: 100vh;
 }
 
+@media only screen and (max-width: 600px) {
+    #container {
+        display: grid;
+        grid-template-columns: auto;
+        height: 100vh;
+    }
+
+    .send {
+        grid-column: 1/4;
+    }
+
+    .title {
+        display: none;
+    }
+
+    my-position {
+        padding: 10px;
+        display:block;
+        grid-column: 1/4;
+    }
+
+    .message {
+        grid-column: 1/4;
+        height: 200px;
+        margin-top:50px;
+    }
+}
+
 .send {
     grid-column: 2/4;
 }
