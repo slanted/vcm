@@ -35,6 +35,7 @@ class GoogleMap extends PolymerElement {
 
     var that = this;
     var map;
+    var marker;
 
     var script = document.createElement('script');
     var apiKey = this.apiKey;
@@ -51,7 +52,7 @@ class GoogleMap extends PolymerElement {
             lng: pos.coords.longitude
           }
           map = new google.maps.Map(mapEl, { zoom: 14, center: c })
-          var marker = new google.maps.Marker({ position: c, map: map });
+          marker = new google.maps.Marker({ position: c, map: map });
         });
 
 
@@ -65,7 +66,7 @@ class GoogleMap extends PolymerElement {
             lng: pos.coords.longitude
           }
 
-          var marker = new google.maps.Marker({ position: c, map: map });
+          marker.setPosition(c);
           map.setCenter(c);
         });
       } 
