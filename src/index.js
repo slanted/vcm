@@ -13,6 +13,7 @@ function sendMessage(theMessage) {
     console.log("Sent message");
 }
 
+/*
 document.getElementById("sendMessage").addEventListener("click", ()=> {
     sendMessage("Normal Message");
 });
@@ -20,3 +21,4 @@ document.getElementById("sendMessage").addEventListener("click", ()=> {
 document.getElementById("sendTimedMessage").addEventListener("click", ()=> {
     sendMessage("Timed message");
 });
+*/

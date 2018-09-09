@@ -41,16 +41,35 @@ class GoogleMap extends PolymerElement {
     script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + apiKey);
     script.onload = () => {
       console.log("Loaded script");
-      navigator.geolocation.getCurrentPosition((pos) => {
-        console.log("pos:" + pos);
-        var mapEl = that.$.map;
-        var c = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        }
-        map = new google.maps.Map(mapEl, { zoom: 14, center: c })
-        var marker = new google.maps.Marker({position: c, map: map});
-      })
+
+
+        navigator.geolocation.getCurrentPosition((pos) => {
+          console.log("pos:" + pos);
+          var mapEl = that.$.map;
+          var c = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          }
+          map = new google.maps.Map(mapEl, { zoom: 14, center: c })
+          var marker = new google.maps.Marker({ position: c, map: map });
+        });
+
+
+
+      if (this.watchPosition) {
+        navigator.geolocation.watchPosition((pos) => {
+          console.log("watching pos:" + pos);
+          var mapEl = that.$.map;
+          var c = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          }
+
+          var marker = new google.maps.Marker({ position: c, map: map });
+          map.setCenter(c);
+        });
+      } 
+
 
       // navigator.geolocation.watchPosition((mypos) => {
       //   var center = {
@@ -62,8 +81,6 @@ class GoogleMap extends PolymerElement {
       // })
     }
     document.head.appendChild(script);
-    console.log("Added google script");
-
 
 
     // GoogleMapsApiLoader({
