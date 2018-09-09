@@ -43,6 +43,9 @@ class GoogleMap extends PolymerElement {
     script.onload = () => {
       console.log("Loaded script");
 
+        var options = {
+          enableHighAccurary: true
+        }
 
         navigator.geolocation.getCurrentPosition((pos) => {
           console.log("pos:" + pos);
@@ -53,7 +56,7 @@ class GoogleMap extends PolymerElement {
           }
           map = new google.maps.Map(mapEl, { zoom: 14, center: c })
           marker = new google.maps.Marker({ position: c, map: map });
-        });
+        },null, options);
 
 
 
@@ -68,7 +71,7 @@ class GoogleMap extends PolymerElement {
 
           marker.setPosition(c);
           map.setCenter(c);
-        });
+        },null, options);
       } 
 
 
