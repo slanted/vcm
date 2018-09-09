@@ -10,10 +10,7 @@ class GoogleMap extends PolymerElement {
     return html`
         <style>
           #map {
-            display: block;
-            height: 500px;
-            width: 100%;
-            border:1px solid black;
+            height: 100%;
           }
         </style>
         <div id="map"></div>   
@@ -39,8 +36,8 @@ class GoogleMap extends PolymerElement {
     var that = this;
     var map;
 
-    var apiKey = "AIzaSyBC9ieQc9GXkl5uQc0oBigP-fh5ScMHrfs";
     var script = document.createElement('script');
+    var apiKey = this.apiKey;
     script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + apiKey);
     script.onload = () => {
       console.log("Loaded script");

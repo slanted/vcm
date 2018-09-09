@@ -9,7 +9,7 @@ class MyElement extends PolymerElement {
 
   static get template() {
     return html`
-      <google-map watch-position>
+      <google-map watch-position api-key="AIzaSyBC9ieQc9GXkl5uQc0oBigP-fh5ScMHrfs">
         <google-map-marker title="You" currentPosition></google-map-marker>
       </google-map>
     `;

@@ -1,78 +1,51 @@
 body {
-    color: blue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #container {
     display: grid;
-    grid-template-columns: 200px auto 100px;
-    grid-template-rows: 40px auto 400px;
-    /* grid-template-columns: 40px 50px auto 50px 40px;
-    grid-template-rows: 25% 100px auto; */
+    grid-gap: 5px;
+    grid-template-rows: 10% 75% 10%;
     height: 100vh;
+    background: #eeeeee;
 }
 
-@media only screen 
-and (min-device-width: 375px)
-and (max-device-width: 667px) {
-    #container {
-        background: lightcyan;
-        display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: auto;
-        height: 100vh;
-    }
+#middle {
+    display: grid;
+    grid-template-rows: 1fr 1fr 10fr;
+    padding: 10px;
+}
 
-    button {
-        width: 100%;
-        height: 160px;
-        margin: 5px;
-        border: 2px solid black;
-        background: lightblue;
-        font-size: 40px;
-    }
-
-    .send {
-        grid-column: 1/4;
-    }
-
-    .title {
-        display: none;
-    }
-
-    my-position {
-        padding: 10px;
-        display:block;
-        grid-column: 1/4;
-    }
-
-    .message {
-        grid-column: 1/4;
-        height: 200px;
-        margin-top:50px;
-    }
+button {
+    width: 100%;
+    height: 60px;
+    margin: 5px;
+    border: 2px solid black;
+    background: lightblue;
+    font-size:
 }
 
 .send {
-    grid-column: 2/4;
+    grid-column: 1/4;
+}
+
+#title {
+    background: lightblue;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+#logWindow {
+    background: lightblue;
+    border: 1px solid black;
 }
 
 .message {
-    grid-column: 2/4;
-    height: 400px;
-}
-
-#messageWindowTitle {
-    background: blue;
-    color: white;
-    padding: 5px;
-    margin-bottom: 5px;
-}
-
-.logWindow {
-    grid-column: 1/4;
-    background: lightgray;
-    color: black;
-    border: 1px solid black;
-    margin-bottom: 50px;
-    padding: 10px;
+    background: lightblue;
+    height: 200px;
+    margin-top: 50px;
 }

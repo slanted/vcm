@@ -8,21 +8,38 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="-1" />
     <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <div id="container">
-        <div class="title">VCM Web</div>
+        <div id="title">VCM</div>
+        <div id="middle">
+            <div>
+                <button>Send Message</button>
+                <button>Send another Message</button>
+            </div>
+            <div>
+                <div>Description goes here more</div>
+            </div>
+            <google-map watch-position api-key="AIzaSyBC9ieQc9GXkl5uQc0oBigP-fh5ScMHrfs">
+                <google-map-marker title="You" currentPosition></google-map-marker>
+            </google-map>
+        </div>
+        <div id="logWindow">Messages go here</div>
+        <!-- <div class="title">VCM Web</div>
         <div class="send">
             <button id="sendMessage">Send Message</button>
             <button id="sendTimedMessage">Send Timed Message</button>
-            <my-position></my-position>
+            <google-map watch-position api-key="AIzaSyBC9ieQc9GXkl5uQc0oBigP-fh5ScMHrfs">
+                <google-map-marker title="You" currentPosition></google-map-marker>
+            </google-map>
         </div>
         <div class="message">
             <div id="messageWindowTitle">Message Window</div>
             <div id="message">Awaiting message...</div>
         </div>
-        <div id="logWindow" class="logWindow"></div>
+        <div id="logWindow" class="logWindow"></div> -->
     </div>
 </body>
 
