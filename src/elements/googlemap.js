@@ -54,7 +54,7 @@ class GoogleMap extends PolymerElement {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
           }
-          map = new google.maps.Map(mapEl, { zoom: 14, center: c })
+          map = new google.maps.Map(mapEl, { zoom: 15, center: c })
           marker = new google.maps.Marker({ position: c, map: map });
         },null, options);
 
