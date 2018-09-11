@@ -45,8 +45,10 @@ class GoogleMap extends PolymerElement {
       position: { type: Object },
       watchPosition: { type: Boolean },
       status: { type: Boolean },
-      highAccuracy: { type: Boolean, value:true },
-      track: { type: Boolean, value: false }
+      highAccuracy: { type: Boolean, value: true },
+      track: { type: Boolean, value: false },
+      lat: { type: String },
+      lng: { type: String }
     };
   }
 
@@ -56,12 +58,16 @@ class GoogleMap extends PolymerElement {
 
   toggleAccuracy() {
     this.highAccuracy = !this.highAccuracy;
-    console.log("Set highAccuracy:"+this.highAccuracy);
+    console.log("Set highAccuracy:" + this.highAccuracy);
   }
 
   toggleTracking() {
     this.track = !this.track;
-    console.log("Set track:"+this.track);
+    console.log("Set track:" + this.track);
+  }
+
+  setPosition() {
+
   }
 
   ready() {
@@ -81,16 +87,20 @@ class GoogleMap extends PolymerElement {
         enableHighAccurary: this.highAccuracy
       }
 
-      navigator.geolocation.getCurrentPosition((pos) => {
-        var mapEl = that.$.map;
-        var c = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        }
-        this.status = "Got inital position:"+c.lat+" "+c.lng;
-        map = new google.maps.Map(mapEl, { zoom: 15, center: c })
-        current = new google.maps.Marker({ position: c, map: map });
-      }, null, options);
+      if (this.watchPosition) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          var mapEl = that.$.map;
+          var c = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          }
+          this.status = "Got inital position:" + c.lat + " " + c.lng;
+          map = new google.maps.Map(mapEl, { zoom: 15, center: c })
+          current = new google.maps.Marker({ position: c, map: map });
+        }, null, options);
+      } else {
+
+      }
 
       if (this.watchPosition) {
         navigator.geolocation.watchPosition((pos) => {
@@ -100,46 +110,14 @@ class GoogleMap extends PolymerElement {
             lng: pos.coords.longitude
           }
 
-          this.status = "Got Position:"+c.lat+" "+c.lng;
+          this.status = "Got Position:" + c.lat + " " + c.lng;
 
           currentMarker.setPosition(c);
           map.setCenter(c);
         }, null, options);
       }
-
-
-      // navigator.geolocation.watchPosition((mypos) => {
-      //   var center = {
-      //     lat: mypos.coords.latitude,
-      //     lng: mypos.coords.longitude
-      //   }
-      //   map.setCenter(center);
-      //   console.log("Set center");
-      // })
     }
     document.head.appendChild(script);
-
-
-    // GoogleMapsApiLoader({
-    //   libraries: [],
-    //   apiKey: '' // optional
-    // })
-    //   .then(function (googleApi) {
-
-    //     if (that.watchPosition) {
-    //       console.log("watching position");
-    //       navigator.geolocation.watchPosition((pos) => {
-    //         console.log("Got position");
-    //         that.position = pos;
-    //         that.printPosition(pos);
-    //         var mapEl = that.$.map;
-    //         console.log("mapEl:" + mapEl);
-    //         var map = googleApi.maps.Map(mapEl, { zoom: 4, center: pos })
-    //       });
-    //     }
-    //   }, function (err) {
-    //     console.error(err);
-    //   });
   }
 }
 
