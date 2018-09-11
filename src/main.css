@@ -12,8 +12,9 @@ body {
 
 #middle {
     display: grid;
-    grid-template-rows: 1fr 1fr 10fr;
+    grid-template-rows: 1fr 10fr;
     padding: 10px;
+    border:1px solid black;
 }
 
 button {
@@ -22,7 +23,6 @@ button {
     margin: 5px;
     border: 2px solid black;
     background: lightblue;
-    font-size:
 }
 
 .send {

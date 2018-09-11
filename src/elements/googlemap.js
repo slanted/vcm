@@ -10,9 +10,30 @@ class GoogleMap extends PolymerElement {
     return html`
         <style>
           #map {
-            height: 100%;
+            height: 93%;
           }
+
+          .options {
+            display: inline-grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+          }
+
+          .options span {
+            border: 2px solid black;
+            align-self: stretch;
+            padding: 5px;
+            margin:2px;
+            background: lightblue;
+            text-align: center;
+          }
+
         </style>
+        <div>Status: {{status}}</div>
+        <div class="options">
+          <span on-click="toggleAccuracy">High Accuracy: {{highAccuracy}}</span>
+          <span on-click="toggleTracking">Tracking: {{track}}</span>
+        </div>
         <div id="map"></div>   
     `;
   }
@@ -22,7 +43,10 @@ class GoogleMap extends PolymerElement {
       apiKey: { type: String },
       currentPosition: { type: Boolean },
       position: { type: Object },
-      watchPosition: { type: Boolean }
+      watchPosition: { type: Boolean },
+      status: { type: Boolean },
+      highAccuracy: { type: Boolean, value:true },
+      track: { type: Boolean, value: false }
     };
   }
 
@@ -30,12 +54,22 @@ class GoogleMap extends PolymerElement {
     console.log("Lat:" + pos.coords.latitude + " Lon:" + pos.coords.longitude);
   }
 
+  toggleAccuracy() {
+    this.highAccuracy = !this.highAccuracy;
+    console.log("Set highAccuracy:"+this.highAccuracy);
+  }
+
+  toggleTracking() {
+    this.track = !this.track;
+    console.log("Set track:"+this.track);
+  }
+
   ready() {
     super.ready();
 
     var that = this;
     var map;
-    var marker;
+    var currentMarker;
 
     var script = document.createElement('script');
     var apiKey = this.apiKey;
@@ -43,36 +77,35 @@ class GoogleMap extends PolymerElement {
     script.onload = () => {
       console.log("Loaded script");
 
-        var options = {
-          enableHighAccurary: true
+      var options = {
+        enableHighAccurary: this.highAccuracy
+      }
+
+      navigator.geolocation.getCurrentPosition((pos) => {
+        var mapEl = that.$.map;
+        var c = {
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
         }
-
-        navigator.geolocation.getCurrentPosition((pos) => {
-          console.log("pos:" + pos);
-          var mapEl = that.$.map;
-          var c = {
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude
-          }
-          map = new google.maps.Map(mapEl, { zoom: 15, center: c })
-          marker = new google.maps.Marker({ position: c, map: map });
-        },null, options);
-
-
+        this.status = "Got inital position:"+c.lat+" "+c.lng;
+        map = new google.maps.Map(mapEl, { zoom: 15, center: c })
+        current = new google.maps.Marker({ position: c, map: map });
+      }, null, options);
 
       if (this.watchPosition) {
         navigator.geolocation.watchPosition((pos) => {
-          console.log("watching pos:" + pos);
           var mapEl = that.$.map;
           var c = {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude
           }
 
-          marker.setPosition(c);
+          this.status = "Got Position:"+c.lat+" "+c.lng;
+
+          currentMarker.setPosition(c);
           map.setCenter(c);
-        },null, options);
-      } 
+        }, null, options);
+      }
 
 
       // navigator.geolocation.watchPosition((mypos) => {
